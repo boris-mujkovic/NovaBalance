@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import docloop from "../../assets/docloop.png";
 
-import Projektovanje1 from "../../assets/Projektovanje 01.png";
+import Projektovanje1 from "../../assets/Projektovanje 01.jpg";
 import Software from "../../assets/NovaFormaSoftware.png";
 import Course from "../../assets/Course.jpg";
 import Consult from "../../assets/Consult.jpg";
