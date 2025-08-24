@@ -1,10 +1,10 @@
 import React from "react";
-import Services from "../Services/Services";
+import ServiceSection from "../Services/ServiceSection";
 
 function Home() {
   return (
     <>
-      <Services />
+      <ServiceSection />
     </>
   );
 }

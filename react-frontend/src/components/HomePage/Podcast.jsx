@@ -1,7 +1,7 @@
 import React from "react";
 import podcast from "../../assets/Podcast.png";
 
-function Podcast() {
+function Podcast({data}) {
   return (
     <div
       id="podcast"
@@ -19,15 +19,16 @@ function Podcast() {
           Da li želite da saznate više?
         </span>
         <h2 className="text-2xl md:text-3xl">
-          Konto Kosta i Tajna Formule PDV-a
+          {data.heading}
         </h2>
-        <p className="font-merriweather text-sm md:text-base">
-          Saznajte kako digitalni alati menjaju način na koji poslujete.
-          Automatizacija, efikasnost i priče iz prakse - sve na jednom mestu.
-        </p>
+        <div
+            className="font-merriweather text-sm sm:text-base md:text-base"
+            dangerouslySetInnerHTML={{ __html: data?.content }}
+          />
         <a
           href="https://open.spotify.com/show/2uFoVB4oUtIASJ2wLcaFk6"
           className="bg-[#a0258c] text-white px-6 py-2 rounded-xl hover:bg-hover-dark-pink transition"
+          target="_blank"
         >
           Slušajte sada
         </a>

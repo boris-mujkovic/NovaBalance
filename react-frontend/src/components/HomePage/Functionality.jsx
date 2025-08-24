@@ -1,25 +1,25 @@
 import React from "react";
 
-function Functionality() {
+function Functionality({ data }) {
+  const parts = data.heading.split(/(Forma)/);
   return (
     <div id="functionality" className="px-6 md:px-12 lg:px-20 xl:px-40 lg:pt-6">
       <div className="w-full flex flex-col justify-center gap-8 py-10 rounded-xl text-black min-h-[600px] bg-gradient-to-b from-[#debdda] to-[#ffe6ff]">
         <h2 className="text-2xl md:text-3xl text-center">
-          Šta Vam Nova
-          <span className="text-hover-dark-pink font-bold">Forma</span> nudi?
+          {parts.map((part, index) =>
+            part === "Forma" ? (
+              <span key={index} className="text-hover-dark-pink font-bold">
+                {part}
+              </span>
+            ) : (
+              part
+            )
+          )}
         </h2>
-        <p className="text-center font-merriweather font-bold text-sm md:text-base mx-6">
-          Više vremena za poslovanje, a manje za papire.
-        </p>
-        <p className="text-center font-merriweather text-sm md:text-base px-4 md:px-16 max-w-7xl mx-auto">
-          Otkrijte kako automatizacija i pametna rešenja pojednostavljuju vaše
-          računovodstvo. Automatizacija u NovaForma softveru znači da više ne
-          morate provoditi sate ručno unoseći podatke ili proveravajući da li su
-          sve stavke tačne. Naš sistem automatski prepoznaje i obrađuje
-          dokumente, generiše izveštaje i omogućava vam da se posvetite važnijim
-          aspektima poslovanja. Upoznajte se sa svim pametnim funkcijama koje
-          vam olakšavaju rad.
-        </p>
+        <div
+          className="text-center font-merriweather text-sm md:text-base px-4 md:px-16 max-w-7xl mx-auto"
+          dangerouslySetInnerHTML={{ __html: data?.content }}
+        />
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
           <div className="p-6 rounded-xl text-white text-center w-full md:w-1/3 min-h-[200px] flex flex-col items-center justify-center bg-gradient-to-t from-[#912585] to-[#b266a9] ">

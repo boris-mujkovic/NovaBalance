@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Input";
 
-function Newsletter() {
+function Newsletter({data}) {
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -60,11 +60,11 @@ function Newsletter() {
         <span className="bg-[#fbe2fb] rounded-xl px-3 py-1 text-sm">
           Kontaktirajte nas
         </span>
-        <h2 className="text-2xl md:text-3xl">Tu smo za sva Vaša pitanja!</h2>
-        <p className="font-merriweather text-sm md:text-base">
-          Ukoliko imate pitanje, predlog ili komentar, pošaljite nam
-          poruku – odgovaramo brzo!
-        </p>
+        <h2 className="text-2xl md:text-3xl">{data.heading}</h2>
+        <div
+            className="font-merriweather text-sm sm:text-base md:text-base"
+            dangerouslySetInnerHTML={{ __html: data?.content }}
+          />
       </div>
 
       <div className="w-full md:w-1/2 flex flex-col justify-center gap-6">

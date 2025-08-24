@@ -141,7 +141,7 @@ function Footer() {
                 <li>
                   <button
                     onClick={() => scrollToSection("contact")}
-                    className="hover:text-hover-pink transition tracking-[1px]"
+                    className="hover:text-white transition tracking-[1px]"
                   >
                     Kontakt
                   </button>

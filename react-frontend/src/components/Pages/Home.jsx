@@ -1,21 +1,32 @@
-import React from "react";
-import Hero from "../HomePage/Hero";
-import General from "../HomePage/General";
-import About from "../HomePage/About";
-import Functionality from "../HomePage/Functionality";
-import Podcast from "../HomePage/Podcast";
-import Newsletter from "../HomePage/Newsletter";
+import React, { useContext } from "react";
 import ScrollToTopButton from "../ScrollToTopButton";
+import { DataContext } from "../../context/DataContext";
+import { sectionComponents } from "./index";
 
 function Home() {
+  const { homeData, loading, error } = useContext(DataContext);
+
+  if (loading) {
+    return <div className="text-center py-10">Učitava se...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-10">{error}</div>
+    );
+  }
+
+  if (!homeData) {
+    return <div className="text-center py-10">No services data available</div>;
+  }
+
   return (
     <>
-      <Hero />
-      <General />
-      <About />
-      <Functionality />
-      <Podcast />
-      <Newsletter />
+      {homeData?.map((section) => {
+        const Component = sectionComponents[section.section_id];
+        if (!Component) return null;
+        return <Component data={section} />;
+      })}
       <ScrollToTopButton />
     </>
   );

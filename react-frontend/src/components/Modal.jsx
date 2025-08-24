@@ -107,19 +107,16 @@ const ContactModal = ({ isOpen, onClose }) => {
         ref={modalRef}
         className="relative bg-white rounded-xl p-4 sm:p-6 w-full max-w-2xl shadow-lg overflow-y-auto max-h-[90vh]"
       >
-        {/* Mobile Close Button (X) */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4  rounded-xl p-0.5 text-gray-500 hover:text-hover-dark-pink focus:outline-none sm:hidden"
+          className="absolute top-4 right-4 rounded-xl p-0.5 text-gray-500 hover:text-hover-dark-pink focus:outline-none"
           aria-label="Zatvori modal"
         >
-          <MdClose className="bg-hover-pink rounded-xl p-1 text-white text-xl" />
+          <MdClose className="bg-hover-pink bg-transparent p-1 text-grey text-3xl " />
         </button>
-
         <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800 text-center">
           Kontakt
         </h2>
-
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-4"

@@ -12,3 +12,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+@layer components {
+  .proseOdd p {
+    @apply font-merriweather mt-3 text-sm sm:text-base;
+  }
+
+  .proseEven p {
+    @apply font-merriweather mt-3 text-sm sm:text-base;
+  }
+
+  .proseOdd ul {
+    @apply list-disc pl-4 sm:pl-5 text-sm sm:text-base mt-3 font-merriweather;
+  }
+
+  .proseEven ul {
+    @apply list-disc pl-5  mt-3 text-base font-merriweather;
+  }
+}
