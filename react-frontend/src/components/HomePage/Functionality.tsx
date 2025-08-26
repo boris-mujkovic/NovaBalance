@@ -1,6 +1,6 @@
-import React from "react";
+import { AppData } from "../../interface/interfaces";
 
-function Functionality({ data }) {
+function Functionality({ data }: { data: AppData }) {
   const parts = data.heading.split(/(Forma)/);
   return (
     <div id="functionality" className="px-6 md:px-12 lg:px-20 xl:px-40 lg:pt-6">

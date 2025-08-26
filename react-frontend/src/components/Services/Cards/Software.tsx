@@ -1,7 +1,7 @@
-import React from "react";
 import Projektovanje1 from "../../../assets/Projektovanje01.png";
+import { AppData } from "../../../interface/interfaces";
 
-function Software({ section }) {
+function Software({ section }: { section: AppData }) {
   const parts = section.heading?.split(/(Forma)/) || [];
 
   return (

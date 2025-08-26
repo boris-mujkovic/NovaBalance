@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 import ContactModal from "../Modal";
 import ScrollToTopButton from "../ScrollToTopButton";
+import { AppData } from "../../interface/interfaces";
 
-function ServiceOffer({ section }) {
+function ServiceOffer({ section }: { section: AppData }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import Software from "../../assets/NovaFormaSoftware.png";
 
-const ServiceHero = ({ section }) => {
+const ServiceHero = ({ section }: any) => {
   const parts = section.heading?.split(/(Balance)/) || [];
 
   return (
@@ -9,7 +9,7 @@ const ServiceHero = ({ section }) => {
       {/* Text Content */}
       <div className="w-full lg:w-1/2 flex flex-col gap-6">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-snug">
-          {parts.map((part, index) =>
+          {parts.map((part: string, index: number) =>
             part === "Balance" ? (
               <span key={index} className="text-hover-dark-pink font-bold">
                 {part}

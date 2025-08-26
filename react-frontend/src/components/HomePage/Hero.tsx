@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 
 import SoftwareImage from "../../assets/NovaFormaSoftware.png";
-import Button from "../Button";
 
-function Hero({ data }) {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(null);
+import { AppData } from "../../interface/interfaces";
+import Button from "../shared/Button";
 
-  const handleSubmit = async (e) => {
+function Hero({ data }: { data: AppData }) {
+  const [email, setEmail] = useState<string>("");
+  const [status, setStatus] = useState<string>("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData();
     form.append("email", email);

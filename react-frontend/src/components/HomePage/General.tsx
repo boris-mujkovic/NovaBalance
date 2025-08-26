@@ -1,11 +1,11 @@
-import React from "react";
 import Carousel1 from "../../assets/Carousel1.jpg";
 import Carousel2 from "../../assets/Carousel2.jpg";
 import Carousel4 from "../../assets/Carousel4.jpg";
+import { AppData } from "../../interface/interfaces";
 
 const images = [Carousel1, Carousel2, Carousel4];
 
-function General({ data }) {
+function General({ data }: { data: AppData }) {
   const parts = data.heading.split(/(Balance)/);
 
   return (

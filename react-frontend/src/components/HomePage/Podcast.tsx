@@ -1,7 +1,8 @@
 import React from "react";
 import podcast from "../../assets/Podcast.png";
+import { AppData } from "../../interface/interfaces";
 
-function Podcast({data}) {
+function Podcast({ data }: { data: AppData }) {
   return (
     <div
       id="podcast"
@@ -18,13 +19,11 @@ function Podcast({data}) {
         <span className="bg-[#fbe2fb] rounded-xl px-3 py-1 text-sm">
           Da li želite da saznate više?
         </span>
-        <h2 className="text-2xl md:text-3xl">
-          {data.heading}
-        </h2>
+        <h2 className="text-2xl md:text-3xl">{data.heading}</h2>
         <div
-            className="font-merriweather text-sm sm:text-base md:text-base"
-            dangerouslySetInnerHTML={{ __html: data?.content }}
-          />
+          className="font-merriweather text-sm sm:text-base md:text-base"
+          dangerouslySetInnerHTML={{ __html: data?.content }}
+        />
         <a
           href="https://open.spotify.com/show/2uFoVB4oUtIASJ2wLcaFk6"
           className="bg-[#a0258c] text-white px-6 py-2 rounded-xl hover:bg-hover-dark-pink transition"

@@ -1,7 +1,7 @@
-import React from "react";
 import Course from "../../../assets/Course.jpg";
+import { AppData } from "../../../interface/interfaces";
 
-function Training({ section }) {
+function Training({ section }: { section: AppData }) {
   return (
     <>
       <div className="block lg:hidden flex justify-center z-20 mt-4">

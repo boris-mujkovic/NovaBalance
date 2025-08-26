@@ -1,19 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { DataContext } from "../../context/DataContext";
 import { sectionComponents } from "./index";
+import Loading from "../../Loading";
+import { AppData } from "../../interface/interfaces";
 
 function Home() {
   const { homeData, loading, error } = useContext(DataContext);
 
   if (loading) {
-    return <div className="text-center py-10">Učitava se...</div>;
+    return <Loading />;
   }
 
   if (error) {
-    return (
-      <div className="text-center py-10">{error}</div>
-    );
+    return <div className="text-center py-10">{error}</div>;
   }
 
   if (!homeData) {
@@ -22,8 +22,8 @@ function Home() {
 
   return (
     <>
-      {homeData?.map((section) => {
-        const Component = sectionComponents[section.section_id];
+      {homeData?.map((section: AppData) => {
+        const Component = sectionComponents[section.section_id as any];
         if (!Component) return null;
         return <Component data={section} />;
       })}

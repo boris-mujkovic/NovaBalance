@@ -1,7 +1,7 @@
-import React from "react";
 import Consult from "../../../assets/Consult.jpg";
+import { AppData } from "../../../interface/interfaces";
 
-function ConsultService({ section }) {
+function ConsultService({ section }: { section: AppData }) {
   return (
     <>
       <div className="block lg:hidden flex justify-center z-20 mt-4">

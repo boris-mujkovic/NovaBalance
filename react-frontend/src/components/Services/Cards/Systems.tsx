@@ -1,7 +1,7 @@
-import React from "react";
 import docloop from "../../../assets/docloop.png";
+import { AppData } from "../../../interface/interfaces";
 
-function Systems({ section }) {
+function Systems({ section }: { section: AppData }) {
   return (
     <>
       <div className="block lg:hidden flex justify-center z-20 mt-4">

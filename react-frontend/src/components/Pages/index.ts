@@ -5,9 +5,8 @@ import Podcast from "../HomePage/Podcast";
 import Newsletter from "../HomePage/Newsletter";
 import General from "../HomePage/General";
 import ServiceHero from "../Services/ServiceHero";
-import ServiceOffer from "../Services/ServiceOffer"
 
-export const sectionComponents = {
+export const sectionComponents: { [key: number]: React.FC<any> } = {
   1: Hero,
   2: ServiceHero,
   3: General,

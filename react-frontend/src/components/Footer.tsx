@@ -1,18 +1,41 @@
-import React from "react";
 import logo from "../assets/Logo.webp";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "../shared/Button";
-import Input from "../shared/Input";
+import Button from "./shared/Button";
+import Input from "./shared/Input";
+import { quickLinks } from "../data/navigationsLinks";
+
+const socialLinks = [
+  {
+    href: "https://www.linkedin.com/company/novabalance/",
+    src: "https://www.svgrepo.com/show/521725/linkedin.svg",
+    alt: "LinkedIn",
+  },
+  {
+    href: "https://www.instagram.com/novabalancesoftware/",
+    src: "https://www.svgrepo.com/show/521711/instagram.svg",
+    alt: "Instagram",
+  },
+  {
+    href: "https://open.spotify.com/show/2uFoVB4oUtIASJ2wLcaFk6",
+    src: "https://cdn-icons-png.flaticon.com/128/87/87409.png",
+    alt: "Spotify",
+  },
+  {
+    href: "https://www.youtube.com/@NovaBalanceYT",
+    src: "https://cdn-icons-png.flaticon.com/128/3669/3669688.png",
+    alt: "YouTube",
+  },
+];
 
 function Footer() {
   const location = useLocation();
   const isOnServicesPage = location.pathname === "/usluge";
 
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<string | null>(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
@@ -31,7 +54,7 @@ function Footer() {
     }
   };
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({
@@ -55,41 +78,16 @@ function Footer() {
           <div className="flex flex-col items-start">
             <img src={logo} alt="logo" className="w-56 h-auto mb-4" />
             <div className="flex gap-4">
-              <a href="https://www.linkedin.com/company/novabalance/">
-                <img
-                  src="https://www.svgrepo.com/show/521725/linkedin.svg"
-                  alt="LinkedIn"
-                  className="w-8 h-8"
-                />
-              </a>
-              {/* <a href="">
-                <img
-                  src="https://www.svgrepo.com/show/521654/facebook.svg"
-                  alt="Facebook"
-                  className="w-8 h-8"
-                />
-              </a> */}
-              <a href="https://www.instagram.com/novabalancesoftware/">
-                <img
-                  src="https://www.svgrepo.com/show/521711/instagram.svg"
-                  alt="Instagram"
-                  className="w-8 h-8"
-                />
-              </a>
-              <a href="https://open.spotify.com/show/2uFoVB4oUtIASJ2wLcaFk6">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/87/87409.png"
-                  alt="Spotify"
-                  className="w-8 h-8"
-                />
-              </a>
-              <a href="https://www.youtube.com/@NovaBalanceYT">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/3669/3669688.png"
-                  alt="YouTube"
-                  className="w-8 h-8"
-                />
-              </a>
+              {socialLinks.map(({ href, src, alt }) => (
+                <a
+                  key={alt}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={src} alt={alt} className="w-8 h-8" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -98,54 +96,25 @@ function Footer() {
             <div className="flex flex-col">
               <h3 className="text-lg font-semibold mb-2">Brzi Linkovi</h3>
               <ul className="space-y-0.5 text-black">
-                <li>
-                  <button
-                    onClick={() => scrollToSection("general")}
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    Benefiti
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("about")}
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    O nama
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("functionality")}
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    Funkcionalnosti
-                  </button>
-                </li>
-                <li>
-                  <Link
-                    to="/usluge"
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    Usluge
-                  </Link>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("podcast")}
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    Podcast
-                  </button>
-                </li>
-                <li>
-                  <button
-                    onClick={() => scrollToSection("contact")}
-                    className="hover:text-white transition tracking-[1px]"
-                  >
-                    Kontakt
-                  </button>
-                </li>
+                {quickLinks.map(({ label, section, to }) => (
+                  <li key={label}>
+                    {to ? (
+                      <Link
+                        to={to}
+                        className="hover:text-white transition tracking-[1px]"
+                      >
+                        {label}
+                      </Link>
+                    ) : (
+                      <button
+                        onClick={() => section && scrollToSection(section)}
+                        className="hover:text-white transition tracking-[1px]"
+                      >
+                        {label}
+                      </button>
+                    )}
+                  </li>
+                ))}
               </ul>
             </div>
           ) : (

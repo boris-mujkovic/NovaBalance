@@ -1,7 +1,7 @@
-import React from "react";
 import Hero from "../../assets/superheroN.webp";
+import { AppData } from "../../interface/interfaces";
 
-function About({data}) {
+function About({data}: { data: AppData }) {
   const parts = data.heading.split(/(Balance)/);
   return (
     <div

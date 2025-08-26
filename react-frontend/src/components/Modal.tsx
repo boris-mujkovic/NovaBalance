@@ -1,59 +1,78 @@
 import { useRef, useState, useEffect } from "react";
-import Input from "./Input";
 import { MdClose } from "react-icons/md";
+import Input from "./shared/Input";
 
-const ContactModal = ({ isOpen, onClose }) => {
-  const modalRef = useRef(null);
-  const [status, setStatus] = useState(null);
+type ModalProps = {
+  isOpen?: boolean;
+  onClose?: () => void;
+};
 
-  const [formData, setFormData] = useState({
-    ime: "",
-    prezime: "",
-    email: "",
-    organizacija: "",
-    telefon: "",
-    postanskiBroj: "",
-    grad: "",
-    drzava: "",
-    adresa: "",
-    pib: "",
-    maticniBroj: "",
-  });
+type FormDataKeys =
+  | "ime"
+  | "prezime"
+  | "email"
+  | "organizacija"
+  | "telefon"
+  | "postanskiBroj"
+  | "grad"
+  | "drzava"
+  | "adresa"
+  | "pib"
+  | "maticniBroj";
 
-  const formDetails = [
-    { label: "Ime", name: "ime", required: true },
-    { label: "Prezime", name: "prezime", required: true },
-    { label: "Email", name: "email", type: "email", required: true },
-    { label: "Organizacija", name: "organizacija", required: true },
-    { label: "Telefon", name: "telefon", required: true },
-    { label: "Poštanski broj", name: "postanskiBroj", required: true },
-    { label: "Grad", name: "grad", required: true },
-    { label: "Država", name: "drzava", required: true },
-    { label: "Adresa", name: "adresa", required: true },
-    { label: "PIB", name: "pib", required: true },
-    { label: "Matični broj", name: "maticniBroj", required: false },
-  ];
+const initialFormState: Record<FormDataKeys, string> = {
+  ime: "",
+  prezime: "",
+  email: "",
+  organizacija: "",
+  telefon: "",
+  postanskiBroj: "",
+  grad: "",
+  drzava: "",
+  adresa: "",
+  pib: "",
+  maticniBroj: "",
+};
 
-  const handleChange = (e) => {
+const formDetails: {
+  label: string;
+  name: FormDataKeys;
+  type?: string;
+  required: boolean;
+}[] = [
+  { label: "Ime", name: "ime", required: true },
+  { label: "Prezime", name: "prezime", required: true },
+  { label: "Email", name: "email", type: "email", required: true },
+  { label: "Organizacija", name: "organizacija", required: true },
+  { label: "Telefon", name: "telefon", required: true },
+  { label: "Poštanski broj", name: "postanskiBroj", required: true },
+  { label: "Grad", name: "grad", required: true },
+  { label: "Država", name: "drzava", required: true },
+  { label: "Adresa", name: "adresa", required: true },
+  { label: "PIB", name: "pib", required: true },
+  { label: "Matični broj", name: "maticniBroj", required: false },
+];
+
+const ContactModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const [formData, setFormData] = useState(initialFormState);
+  const [status, setStatus] = useState<"idle" | "success" | "error" | "loading">("idle");
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus("loading");
 
     const form = new FormData();
-    form.append("ime", formData.ime);
-    form.append("prezime", formData.prezime);
-    form.append("email", formData.email);
-    form.append("organizacija", formData.organizacija);
-    form.append("telefon", formData.telefon);
-    form.append("postanskiBroj", formData.postanskiBroj);
-    form.append("grad", formData.grad);
-    form.append("drzava", formData.drzava);
-    form.append("adresa", formData.adresa);
-    form.append("pib", formData.pib);
-    form.append("maticniBroj", formData.maticniBroj);
+    Object.entries(formData).forEach(([key, value]) => {
+      form.append(key, value);
+    });
 
     try {
       const response = await fetch("home/ponuda", {
@@ -65,35 +84,22 @@ const ContactModal = ({ isOpen, onClose }) => {
 
       await response.json();
       setStatus("success");
-      setFormData({
-        ime: "",
-        prezime: "",
-        email: "",
-        organizacija: "",
-        telefon: "",
-        postanskiBroj: "",
-        grad: "",
-        drzava: "",
-        adresa: "",
-        pib: "",
-        maticniBroj: "",
-      });
+      setFormData(initialFormState);
     } catch (error) {
       setStatus("error");
     }
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        onClose();
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose?.();
       }
     };
 
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -112,21 +118,17 @@ const ContactModal = ({ isOpen, onClose }) => {
           className="absolute top-4 right-4 rounded-xl p-0.5 text-gray-500 hover:text-hover-dark-pink focus:outline-none"
           aria-label="Zatvori modal"
         >
-          <MdClose className="bg-hover-pink bg-transparent p-1 text-grey text-3xl " />
+          <MdClose className="text-3xl p-1 text-gray-500" />
         </button>
+
         <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-gray-800 text-center">
           Kontakt
         </h2>
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4"
-        >
+
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {formDetails.map(({ label, name, type = "text", required }) => (
             <div key={name} className="flex flex-col">
-              <label
-                htmlFor={name}
-                className="mb-1 text-sm font-medium text-gray-700"
-              >
+              <label htmlFor={name} className="mb-1 text-sm font-medium text-gray-700">
                 {label}
                 {required && <span className="text-red-500 ml-1">*</span>}
               </label>
@@ -163,9 +165,10 @@ const ContactModal = ({ isOpen, onClose }) => {
             </button>
             <button
               type="submit"
-              className="w-full sm:w-auto bg-[#a0258c] text-white px-6 py-2 rounded-xl hover:bg-hover-dark-pink transition"
+              disabled={status === "loading"}
+              className="w-full sm:w-auto bg-[#a0258c] text-white px-6 py-2 rounded-xl hover:bg-hover-dark-pink transition disabled:opacity-50"
             >
-              Pošalji
+              {status === "loading" ? "Slanje..." : "Pošalji"}
             </button>
           </div>
         </form>
