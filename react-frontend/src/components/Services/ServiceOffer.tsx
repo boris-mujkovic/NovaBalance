@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import ContactModal from "../Modal";
 import ScrollToTopButton from "../ScrollToTopButton";

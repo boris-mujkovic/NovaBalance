@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import ScrollToTopButton from "../ScrollToTopButton";
 import { DataContext } from "../../context/DataContext";
 import { sectionComponents } from "./index";
-import Loading from "../../Loading";
+import Loading from "../shared/Loading";
 import { AppData } from "../../interface/interfaces";
 
 function Home() {

@@ -6,7 +6,7 @@ import Training from "./Cards/Training";
 import ServiceHero from "./ServiceHero";
 import ServiceOffer from "./ServiceOffer";
 import { DataContext } from "../../context/DataContext";
-import Loading from "../../Loading";
+import Loading from "../shared/Loading";
 import { AppData } from "../../interface/interfaces";
 
 const ServiceSection = () => {

@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState, useEffect } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
 import { fetchHomeContent, fetchServicesContent } from "../components/api";
 import { AppData } from "../interface/interfaces";
 
