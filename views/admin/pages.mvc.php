@@ -5,9 +5,9 @@
           <!--begin::Container-->
           <div class="container-fluid">
             <!--begin::Row-->
-            <div class="row">
-              <div class="col-sm-6"><button class="btn btn-primary"><i class="ri-add-large-line"></i> Dodaj</button></div>
-              </div>
+            <!-- <div class="row">
+              <div class="col-sm-6"><button id='add_page' data-toggle="modal" data-target="#exampleModalCenter"class="btn btn-primary"><i class="ri-add-large-line"></i> Dodaj</button></div>
+              </div> -->
             <!--end::Row-->
           </div>
           <!--end::Container-->
@@ -92,4 +92,3 @@
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
-

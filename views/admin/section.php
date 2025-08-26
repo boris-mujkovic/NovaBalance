@@ -18,12 +18,13 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-        <div class="col-sm-6"><h3 class="mb-0">Sekcije Stranice `<?= $page_name['title'] ?>`</h3></div>
+        <div class="col-sm-6"><h3 class="mb-0">Sekcija: `<?= $section['section_title'] ?>`</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="/admin/index">Home</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href='/admin/pages'>Stranice</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Sekcije za "<?= $page_name['title'] ?>"</li>
+<li class="breadcrumb-item " aria-current="page"><a href='/admin/page?page_id=<?= $page_details['page_id'] ?>'>Sekcije za "<?= $page_details['title'] ?>"</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Sekcija: "<?= $section['section_title'] ?>"</li>
                 </ol>
               </div>
             </div>
@@ -40,31 +41,30 @@
             <div class="row">
               <div class="col-md-0">
                 <div class="card mb-4">
-                  <div class="card-header"><h3 class="card-title">Sekcije:</h3></div>
+                  <div class="card-header"><h3 class="card-title">Edit:</h3></div>
                   <!-- /.card-header -->
                   <div class="card-body">
-                    <table class="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th style="width: 10px">#</th>
-                          <th>Ime Sekcije</th>
-                          <th>Naslov (Heading)</th>
-                          <th >Datum Kreiranja</th>
-                          <th style="width: 40px">?</th>
-                        </tr>
-                      </thead>
-                <tbody>
-                        <?php foreach ($sections as $index => $section): ?>
-                        <tr class="align-middle">
-                          <td><?= $index ?>.</td>
-                          <td><?= $section['section_title'] ?> </td>
-                          <td><?= $section['heading'] ?></td>
-                          <td><?= $section['created_at'] ?> </td>
-                          <td><button class="btn btn-primary edit-section" data-type='edit' data-id='<?= $section['id'] ?>'><i class="ri-edit-line"></i></button><button data-type='delete' class='action-button btn btn-danger'data-id='<?= $section['id'] ?>'><i class="ri-close-large-line"></i></button></td>
-                        </tr>
-                        <?php endforeach; ?>
-                      </tbody>
-                    </table>
+                    <!-- EDIT -->
+              <form action='/admin/sectionedit' method='post' id='editSectionForm'>
+                <input type='hidden' id='section_id' name='section_id' value='<?= $section['id'] ?>'>
+                <div class='form-group'>
+                  <label for='section_title'>Naziv Sekcije:</label>
+                  <input type='text' class='form-control' name='section_title' id='section_title' value='<?= $section['section_title'] ?>'>
+                </div>
+                <div class='form-group'>
+                  <label for='section_title'>Naslov Sekcije (Heading):</label>
+                  <input type='text' class='form-control' name='section_heading' id='section_heading' value='<?= $section['heading'] ?>'>
+                </div>
+                <div class='form-group'>
+                  <label for='section_content'>Sadržaj</label>
+                  <textarea id='section_content' class='form-control' rows='7' name='section_content'><?= $section['content'] ?></textarea>
+                </div>
+                <br>
+                <div class='form-group'>
+                  <button class='btn btn-primary form-btn' data-type='edit' data-id='<?= $section['id'] ?>'>Izmeni</button>
+                  <button class='btn btn-danger form-btn' data-type='cancel'>Opozovi</button>
+                </div>
+              </form>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer clearfix">
@@ -92,4 +92,20 @@
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
-
+<!-- Modal -->
+<div class="modal fade" id="notifModalCenter" tabindex="-1" role="dialog" aria-labelledby="notifModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       <!-- <h5 class="modal-title" id="exampleModalCenterLongTitle">Uspešno izmenjena sekcija</h5>
+       --> 
+      </div>
+      <div class="modal-body">
+        Uspešno ste izmenili sekciju!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id='closeModalBtn' data-dismiss="modal">U redu</button>
+      </div>
+    </div>
+  </div>
+</div>

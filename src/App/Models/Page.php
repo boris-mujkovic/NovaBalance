@@ -15,7 +15,7 @@ class Page extends Model
 
     public function getPageContent(string $slug): mixed
     {
-        $sql = "SELECT *, ps.id as section_id FROM {$this->table} p LEFT JOIN {$this->additional_table} ps {$this->join_on} WHERE slug = :slug ORDER BY position ASC; ";
+        $sql = "SELECT *, ps.id as section_id FROM {$this->table} p left join {$this->additional_table} ps {$this->join_on} WHERE slug = :slug ORDER BY position ASC; ";
         $conn = $this->database->getConnection();
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(":slug", $slug);
@@ -46,6 +46,40 @@ class Page extends Model
             return [];
         }
     }
+
+    public function getSpecificSection($section_id): array
+    {
+        $sql = "SELECT ps.*,title FROM {$this->table} p left join {$this->additional_table} ps {$this->join_on} WHERE ps.id = $section_id;";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        if ($stmt->execute()) {
+            $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (!empty($sections)) {
+                return $sections;
+            } else {
+                return [];
+            }
+        } else {
+            return [];
+        }
+    }
+
+    public function getPageFromSectionId($section_id): array
+    {
+        $sql = "SELECT * FROM {$this->table} p INNER JOIN {$this->additional_table} ps {$this->join_on} WHERE ps.id = $section_id; ";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        if ($stmt->execute()) {
+            $sections = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (!empty($sections)) {
+                return $sections[0];
+            } else {
+                return [];
+            }
+        } else {
+            return [];
+        }
+    }
     public function getPageSections($page_id): array
     {
         $sql = "SELECT * FROM {$this->additional_table} WHERE page_id = $page_id ORDER BY created_at DESC;";
@@ -60,6 +94,22 @@ class Page extends Model
             }
         } else {
             return [];
+        }
+    }
+
+    public function changeSection(string $section_id, string $section_title, string $section_content, string $section_heading): bool
+    {
+        $sql = "UPDATE page_sections SET section_title = :title , content = :cont , heading = :head WHERE id = :id ;";
+        $conn = $this->database->getConnection();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":title", $section_title);
+        $stmt->bindParam(":cont", $section_content);
+        $stmt->bindParam(":head", $section_heading);
+        $stmt->bindParam(":id", $section_id);
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
     public function getPage($page_id): array

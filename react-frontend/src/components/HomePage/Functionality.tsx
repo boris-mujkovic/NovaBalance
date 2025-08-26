@@ -33,7 +33,14 @@ function Functionality({ data }: { data: AppData }) {
 
           <div className="p-6 rounded-xl text-white text-center w-full md:w-1/3 min-h-[200px] flex flex-col items-center justify-center bg-gradient-to-t from-[#912585] to-[#b266a9]">
             <h3 className="text-lg md:text-xl font-bold">
-              Integracija sa DoCloop
+              Integracija sa{" "}
+              <a
+                href="https://docloop.rs/"
+                target="_blank"
+                className="text-hover-dark-pink"
+              >
+                DoCloop
+              </a>
             </h3>
             <p className="text-sm md:text-base">
               Elektronske fakture i upravljanje dokumentima bez napora.

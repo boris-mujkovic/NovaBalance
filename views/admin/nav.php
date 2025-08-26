@@ -47,7 +47,7 @@
                 <!--end::User Image-->
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
-                  <a href="/NovaBalance/admin/logout" class="btn btn-default btn-flat float-end">Sign out</a>
+                  <a href="/admin/logout" class="btn btn-default btn-flat float-end">Sign out</a>
                 </li>
                 <!--end::Menu Footer-->
               </ul>

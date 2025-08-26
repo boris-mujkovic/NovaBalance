@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react/static/css/main.b2893eb0.css",
-    "main.js": "/react/static/js/main.e06335c9.js",
+    "main.js": "/react/static/js/main.0927a802.js",
     "static/js/453.358231aa.chunk.js": "/react/static/js/453.358231aa.chunk.js",
     "static/media/Podcast.png": "/react/static/media/Podcast.c91edaffb8939ac81c9c.png",
     "static/media/NovaFormaSoftware.png": "/react/static/media/NovaFormaSoftware.fd90e67ce4aeef234f87.png",
@@ -16,11 +16,11 @@
     "static/media/Logo.webp": "/react/static/media/Logo.fb53351ef57ae7a6f688.webp",
     "index.html": "/react/index.html",
     "main.b2893eb0.css.map": "/react/static/css/main.b2893eb0.css.map",
-    "main.e06335c9.js.map": "/react/static/js/main.e06335c9.js.map",
+    "main.0927a802.js.map": "/react/static/js/main.0927a802.js.map",
     "453.358231aa.chunk.js.map": "/react/static/js/453.358231aa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b2893eb0.css",
-    "static/js/main.e06335c9.js"
+    "static/js/main.0927a802.js"
   ]
 }

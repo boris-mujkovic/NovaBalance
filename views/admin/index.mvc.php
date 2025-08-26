@@ -15,9 +15,14 @@
         {% elseif ($page == "pages"): %}
             {% include "admin/pages.mvc.php" %}
         {% elseif ($page == "page"): %}
-            {% include "admin/page.mvc.php" %}
+          {% include "admin/page.mvc.php" %}
+        {% elseif ($page == "section"): %}
+          {% include "admin/section.php" %}
+        {% elseif ($page == "contactForm"): %}
+          {% include "admin/contactForm.php" %}
         {% endif; %}
 
+       {% include "admin/add-page-modal.php" %}
        {% include "admin/footer.php" %}
      </div>
      <!--end::App Wrapper-->
